@@ -1,5 +1,4 @@
-CREATE
-SEQUENCE gitproxy_sequence INCREMENT BY 30 MINVALUE = 1 MAXVALUE = 9223372036854775806;
+CREATE SEQUENCE gitproxy_sequence INCREMENT BY 30 MINVALUE = 1 MAXVALUE = 9223372036854775806;
 
 create table user
 (
@@ -10,7 +9,4 @@ create table user
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_unicode_ci;
 
-CREATE
-OR
-REPLACE FULLTEXT INDEX user_login_index
-ON user (login);
+CREATE OR REPLACE FULLTEXT INDEX user_login_index ON user (login);
