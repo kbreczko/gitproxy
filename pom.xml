@@ -16,6 +16,7 @@
 	<properties>
 		<java.version>11</java.version>
 		<io.springfox.version>3.0.0</io.springfox.version>
+		<mariadb.driver.version>2.7.3</mariadb.driver.version>
 	</properties>
 	<dependencies>
 		<!--web-->
@@ -41,6 +42,18 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
+		</dependency>
+
+		<!--database-->
+		<dependency>
+			<groupId>org.mariadb.jdbc</groupId>
+			<artifactId>mariadb-java-client</artifactId>
+			<version>${mariadb.driver.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
 		<!--test-->
