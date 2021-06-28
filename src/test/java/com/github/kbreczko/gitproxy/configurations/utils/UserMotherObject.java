@@ -13,9 +13,14 @@ public class UserMotherObject {
 
     @Transactional
     public User createAndSaveUser(String login) {
+        return createAndSaveUser(login, 0L);
+    }
+
+    @Transactional
+    public User createAndSaveUser(String login, long requestCount) {
         User user = new User();
         user.setLogin(login);
-        user.setRequestCount(0);
+        user.setRequestCount(requestCount);
         return userRepository.save(user);
     }
 }
