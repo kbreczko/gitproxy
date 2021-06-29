@@ -17,11 +17,17 @@ class UserService {
     private final UserRepository userRepository;
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    @Retryable(value = {CannotAcquireLockException.class})
-    public void createOrIncrementRequestCount(String login) {
-        final User user = userRepository.findByLogin(login).orElseGet(() -> createUser(login));
-        user.setRequestCount(user.getRequestCount() + 1);
-        userRepository.save(user);
+    @Retryable(value = {CannotAcquireLockException.class}) // maxAttempts = 3, maxDelay = 1s
+    public User createOrIncrementRequestCount(String login) {
+        final User user = userRepository.findByLogin(login)
+                .orElseGet(() -> {
+                    log.info("Creating user for login = {}", login);
+                    return createUser(login);
+                });
+        final long nextRequestCount = user.getRequestCount() + 1;
+        log.info("Increment request count for login = {}: {} -> {}", login, user.getRequestCount(), nextRequestCount);
+        user.setRequestCount(nextRequestCount);
+        return userRepository.save(user);
     }
 
     private User createUser(String login) {
