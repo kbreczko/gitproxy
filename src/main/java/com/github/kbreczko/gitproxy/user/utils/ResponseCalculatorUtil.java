@@ -22,8 +22,8 @@ public class ResponseCalculatorUtil {
         }
 
         final BigDecimal value = BigDecimal.valueOf(6)
-                .setScale(2, RoundingMode.HALF_UP)
-                .divide(BigDecimal.valueOf(denominator), RoundingMode.HALF_DOWN);
+                .setScale(8, RoundingMode.HALF_UP)
+                .divide(BigDecimal.valueOf(denominator), RoundingMode.HALF_UP);
 
         return Optional.of(value);
     }
