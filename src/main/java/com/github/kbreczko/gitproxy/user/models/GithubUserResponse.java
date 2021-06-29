@@ -1,14 +1,16 @@
 package com.github.kbreczko.gitproxy.user.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
 @ToString
+@Builder
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 public class GithubUserResponse {
     private long id;
 
@@ -25,8 +27,6 @@ public class GithubUserResponse {
     private LocalDateTime createdAt;
 
     private Integer followers;
-
-    private Integer following;
 
     @JsonProperty("public_repos")
     private Integer publicRepos;
