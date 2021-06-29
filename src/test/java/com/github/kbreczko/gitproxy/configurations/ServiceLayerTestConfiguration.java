@@ -18,6 +18,7 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.*;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.retry.annotation.EnableRetry;
+import org.springframework.web.client.RestTemplate;
 import org.testcontainers.containers.JdbcDatabaseContainer;
 import org.testcontainers.containers.MariaDBContainer;
 
@@ -39,7 +40,7 @@ import java.time.temporal.ChronoUnit;
 @EnableConfigurationProperties({DataSourceProperties.class})
 @Slf4j
 @EnableRetry
-public class ServiceLayerIntegrationTestConfiguration {
+public class ServiceLayerTestConfiguration {
 
     @Bean
     public JdbcDatabaseContainer<?> mariaDBContainer() {
@@ -55,7 +56,6 @@ public class ServiceLayerIntegrationTestConfiguration {
 
     @Primary
     @Bean
-    @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource(JdbcDatabaseContainer<?> mariaDBContainer) {
         return DataSourceBuilder.create()
                 .type(HikariDataSource.class)
@@ -64,5 +64,10 @@ public class ServiceLayerIntegrationTestConfiguration {
                 .url(mariaDBContainer.getJdbcUrl())
                 .driverClassName(mariaDBContainer.getDriverClassName())
                 .build();
+    }
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 }
