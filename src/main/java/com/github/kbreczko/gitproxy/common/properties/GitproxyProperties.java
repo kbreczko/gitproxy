@@ -6,4 +6,9 @@ import lombok.experimental.UtilityClass;
 public class GitproxyProperties {
     public static final String REQUEST_ID = "requestId";
     public static final String APPLICATION_GITHUB_V3 = "application/vnd.github.v3+json";
+
+    @UtilityClass
+    public static class Mappings {
+        public static final String USERS = "/users";
+    }
 }
