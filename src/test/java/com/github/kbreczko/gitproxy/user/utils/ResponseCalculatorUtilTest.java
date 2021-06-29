@@ -8,21 +8,21 @@ import java.math.BigDecimal;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.BigDecimalComparator.BIG_DECIMAL_COMPARATOR;
 
-class ResponseResponseCalculatorUtilTest {
+class ResponseCalculatorUtilTest {
 
     @Test
     void shouldReturnCalculatedValueSuccessfully() {
         final GithubUserResponse response = GithubUserResponse.builder()
                 .id(0)
-                .publicRepos(0)
-                .followers(6)
+                .publicRepos(180)
+                .followers(1507)
                 .build();
 
         assertThat(ResponseCalculatorUtil.calculateValue(response))
                 .isPresent()
                 .get()
                 .usingComparator(BIG_DECIMAL_COMPARATOR)
-                .isEqualTo(new BigDecimal("0.5"));
+                .isEqualTo(new BigDecimal("0.72"));
     }
 
     @Test

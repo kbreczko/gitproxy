@@ -69,7 +69,7 @@ class UserIntegrationTest {
                 .isNotNull()
                 .extracting("id", "login", "name", "type", "avatarUrl", "createdAt", "calculations")
                 .usingComparatorForType(BIG_DECIMAL_COMPARATOR, BigDecimal.class)
-                .containsExactly(id, login, name, type, avatarUrl, createdAt, new BigDecimal("0.03703704"));
+                .containsExactly(id, login, name, type, avatarUrl, createdAt, BigDecimal.valueOf(27));
     }
 
     private String prepareExampleJson(long id, String login, String name, String type, String avatarUrl, LocalDateTime createdAt) throws JsonProcessingException {

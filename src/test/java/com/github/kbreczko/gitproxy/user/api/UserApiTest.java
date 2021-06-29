@@ -61,7 +61,7 @@ class UserApiTest extends AbstractServiceLayerTest {
                 .extracting("id", "login", "name", "type", "avatarUrl", "createdAt", "calculations")
                 .usingRecursiveFieldByFieldElementComparator()
                 .usingComparatorForType(BIG_DECIMAL_COMPARATOR, BigDecimal.class)
-                .containsOnly(response.getId(), login, response.getName(), response.getType(), response.getAvatarUrl(), response.getCreatedAt(), new BigDecimal("0.5"));
+                .containsOnly(response.getId(), login, response.getName(), response.getType(), response.getAvatarUrl(), response.getCreatedAt(), BigDecimal.valueOf(2));
 
         assertThat(userRepository.findAll())
                 .hasSize(1)
@@ -71,7 +71,7 @@ class UserApiTest extends AbstractServiceLayerTest {
     }
 
     @Test
-    void shouldCreateUserAndReturnEmptyWhenUserNotFound() {
+    void shouldCreateUserAndReturnEmptyWhenPageNotFound() {
         //given
         final String login = "test1";
 

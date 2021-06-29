@@ -12,18 +12,15 @@ import java.util.Optional;
 public class ResponseCalculatorUtil {
 
     public static Optional<BigDecimal> calculateValue(@NonNull GithubUserResponse response) {
-        if (response.getFollowers() == null || response.getPublicRepos() == null) {
-            return Optional.empty();
-        }
-
-        final int denominator = response.getFollowers() * (2 + response.getPublicRepos());
-        if (denominator == 0) {
+        if (response.getFollowers() == null || response.getPublicRepos() == null || response.getFollowers() == 0) {
             return Optional.empty();
         }
 
         final BigDecimal value = BigDecimal.valueOf(6)
-                .setScale(8, RoundingMode.HALF_UP)
-                .divide(BigDecimal.valueOf(denominator), RoundingMode.HALF_UP);
+                .setScale(10, RoundingMode.HALF_UP)
+                .divide(BigDecimal.valueOf(response.getFollowers()), RoundingMode.HALF_UP)
+                .multiply(BigDecimal.valueOf((2 + response.getPublicRepos())))
+                .setScale(2, RoundingMode.HALF_UP);
 
         return Optional.of(value);
     }
