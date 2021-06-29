@@ -22,15 +22,15 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
-class UserRestServiceTest {
-    private UserRestService userRestService;
+class UserGithubServiceTest {
+    private UserGithubService userGithubService;
 
     @MockBean
     private RestTemplate restTemplate;
 
     @BeforeEach
     void setUp() {
-        this.userRestService = new UserRestService(restTemplate, "http://localhost:8989");
+        this.userGithubService = new UserGithubService(restTemplate, "http://localhost:8989");
     }
 
     @Test
@@ -52,7 +52,7 @@ class UserRestServiceTest {
                 .thenReturn(new ResponseEntity<>(expectedResponse, HttpStatus.OK));
 
         //when
-        final Optional<GithubUserResponse> response = userRestService.sendRequestToGithubApi(login);
+        final Optional<GithubUserResponse> response = userGithubService.getUserByLogin(login);
 
         //then
         assertThat(response)
@@ -71,7 +71,7 @@ class UserRestServiceTest {
                 .thenReturn(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
         //when
-        final Optional<GithubUserResponse> response = userRestService.sendRequestToGithubApi(login);
+        final Optional<GithubUserResponse> response = userGithubService.getUserByLogin(login);
 
         //then
         assertThat(response).isEmpty();
@@ -86,7 +86,7 @@ class UserRestServiceTest {
                 .thenThrow(new RestClientException("error during sending request"));
 
         //when
-        final Optional<GithubUserResponse> response = userRestService.sendRequestToGithubApi(login);
+        final Optional<GithubUserResponse> response = userGithubService.getUserByLogin(login);
 
         //then
         assertThat(response).isEmpty();

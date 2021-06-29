@@ -19,18 +19,18 @@ import static com.github.kbreczko.gitproxy.common.properties.GitproxyProperties.
 
 @Service
 @Slf4j
-class UserRestService {
+class UserGithubService {
     private final static String USER_RESOURCE_PATH = "users";
 
     private final RestTemplate restTemplate;
     private final String githubApi;
 
-    public UserRestService(RestTemplate restTemplate, @Value("${gitproxy.github.rest.api}") String githubApi) {
+    public UserGithubService(RestTemplate restTemplate, @Value("${gitproxy.github.rest.api}") String githubApi) {
         this.restTemplate = restTemplate;
         this.githubApi = githubApi;
     }
 
-    public Optional<GithubUserResponse> sendRequestToGithubApi(String login) {
+    public Optional<GithubUserResponse> getUserByLogin(String login) {
         final HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.set(HttpHeaders.ACCEPT, APPLICATION_GITHUB_V3);
 

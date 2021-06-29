@@ -14,11 +14,11 @@ import java.util.Optional;
 @Slf4j
 public class UserApi {
     private final UserService userService;
-    private final UserRestService userRestService;
+    private final UserGithubService userGithubService;
 
     public Optional<UserDto> getUser(String login) {
         userService.createOrIncrementRequestCount(login);
-        return userRestService.sendRequestToGithubApi(login)
+        return userGithubService.getUserByLogin(login)
                 .map(response -> {
                     final BigDecimal calculatedValue = ResponseCalculatorUtil.calculateValue(response).orElse(null);
                     return UserDto.of(response, calculatedValue);
