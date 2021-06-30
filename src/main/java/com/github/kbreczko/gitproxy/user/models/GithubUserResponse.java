@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GithubUserResponse {
-    private long id;
+    private Long id;
 
     private String login;
 

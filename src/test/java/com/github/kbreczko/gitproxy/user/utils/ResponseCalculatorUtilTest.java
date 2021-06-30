@@ -13,7 +13,7 @@ class ResponseCalculatorUtilTest {
     @Test
     void shouldReturnCalculatedValueSuccessfully() {
         final GithubUserResponse response = GithubUserResponse.builder()
-                .id(0)
+                .id(0L)
                 .publicRepos(180)
                 .followers(1507)
                 .build();
@@ -28,7 +28,7 @@ class ResponseCalculatorUtilTest {
     @Test
     void shouldReturnEmptyValueWhenFollowersIsZero() {
         final GithubUserResponse response = GithubUserResponse.builder()
-                .id(0)
+                .id(0L)
                 .publicRepos(0)
                 .followers(0)
                 .build();
@@ -39,7 +39,7 @@ class ResponseCalculatorUtilTest {
     @Test
     void shouldReturnEmptyValueWhenResponseIsEmpty() {
         final GithubUserResponse response = GithubUserResponse.builder()
-                .id(0)
+                .id(0L)
                 .build();
 
         assertThat(ResponseCalculatorUtil.calculateValue(response)).isEmpty();

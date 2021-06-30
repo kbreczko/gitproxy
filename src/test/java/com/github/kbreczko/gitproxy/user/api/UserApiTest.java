@@ -38,7 +38,7 @@ class UserApiTest extends AbstractServiceLayerTest {
         //given
         final String login = "test1";
         final GithubUserResponse response = GithubUserResponse.builder()
-                .id(0)
+                .id(0L)
                 .login(login)
                 .name(login)
                 .avatarUrl(null)

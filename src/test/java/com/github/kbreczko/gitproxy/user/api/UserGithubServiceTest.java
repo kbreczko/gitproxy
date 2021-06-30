@@ -38,7 +38,7 @@ class UserGithubServiceTest {
         //given
         final String login = "test1";
         final GithubUserResponse expectedResponse = GithubUserResponse.builder()
-                .id(0)
+                .id(0L)
                 .login(login)
                 .name(login)
                 .avatarUrl(null)
